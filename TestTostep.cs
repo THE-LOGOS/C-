@@ -11,6 +11,7 @@ namespace TestTostep
         static void Main(string[] args)
         {
 			Console.WriteLine("Commit_1");
+			Console.WriteLine("Commit_2");
         }
     }
 }
