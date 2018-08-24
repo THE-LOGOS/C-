@@ -1349,6 +1349,369 @@ using namespace std;
 
 	#pragma endregion
 
+	#pragma region Глава 9
+		#pragma region Задание 1 - 3 - 4 - 9
+			/*class Sales{
+				protected:
+					enum {monts = 3};
+					float totalBook[monts];
+				public:
+					void getData() {
+						for (int i = 0; i < monts; i++)
+						{
+							cout << "Введите объем продаж за " << i+1 << " месяц: "; cin >> totalBook[i];
+						}	
+					}
+					
+					void putData() {
+						for (int i = 0; i < monts; i++)
+						{
+							cout << "Объем продаж за " << i+1 << " месяц: " << totalBook[i] << endl;
+						}	
+					}
+			};
+
+			class Publication{
+					private:
+						string str;
+						float price;
+					public:
+						Publication() :str("N\A"), price(0.0) {}
+						Publication(string str, float pr) :str(str), price(pr) {}
+						
+						void getData() {
+							cout << "Введите название для книги: "; cin >> str;
+							cout << "Введите цену для книги: "; cin >> price;
+						}
+						
+						void putData() {
+							cout << "Название книги: "<< str <<" "; 
+							cout << "Цена книги: " << price << endl;
+						}
+			};
+
+			class Publication2 : public Publication {
+				private:
+					int day, mounth, year;
+				public:
+					void getData() {
+						Publication::getData();
+						cout << "Введите дату выхода книги {xx xx xxxx}: "; 
+						cin >> day >> mounth >> year;
+					}
+
+					void putData() {
+						Publication::putData();
+						cout << "Дата выхода книги " << day << " " << mounth << " " << year << endl;
+					}
+			};
+
+			class Book : public Publication2, public Sales {
+				private:
+					int page;
+				public:
+					Book() :page(0) {}
+
+					void getData() {
+						Publication2::getData();
+						cout << "Введите кол-во страниц для книги: "; cin >> page;
+						Sales::getData();
+					}
+
+					void putData() {
+						Publication2::putData();
+						cout << "Страниц в книге: " << page << endl;
+						Sales::putData();
+					}
+			};
+				
+			class Type : public Publication2, public Sales {
+				private:
+					float timeBook;
+				public:
+					Type() :timeBook(0.0) {}
+
+					void getData() {
+						Publication2::getData();
+						cout << "Введите время записи для книги: "; cin >> timeBook;
+						Sales::getData();
+					}
+
+					void putData() {
+						Publication2::putData();
+						cout << "Время записи книги: " << timeBook << endl;
+						Sales::putData();
+					}
+			};*/
+
+			/*class Disk : Publication {
+				private:
+					enum Type { CD, DVD };
+					char eType;
+				public:
+					void getData() {
+						Publication::getData();
+						cout << "Выбирете тип диска CD (c) \ DVD (d): "; cin >> eType;
+					}
+					
+					void putData() {
+						Publication::putData();
+						int temp;
+						switch (eType){
+							case 'c': temp = 0; break;
+							case 'd': temp = 1; break;
+							default: break;
+						}
+						
+						switch (temp){
+							case 0: cout << "Тип диска "<<"CD"; break;
+							case 1: cout << "Тип диска " << "DVD"; break;
+							default: break;
+						}
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 2 (ok) - 8 (не сделал)
+			/*class String{
+				protected:
+					enum { SZ = 80 };
+					char str[SZ];
+				public:
+					String(){
+						str[0] == '\x0';
+					}
+					String(char s[]){
+						SetStr(s);
+					}
+
+					void SetStr(char *s) {
+						strcpy_s(str, SZ, s);
+					}
+
+					void display() const{
+						cout << str;
+					}
+					operator char* (){
+						return str;
+					}
+			};
+
+			class Pstring : public String{
+				public:
+					Pstring(char s[]){
+						if (strlen(s) > SZ - 1)
+						{
+							for (int i = 0; i < SZ - 1; i++) {
+								str[i] = s[i];
+								str[SZ-1] = '\0';
+							}
+						}
+						else
+						{
+							SetStr(s);
+						}
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 5 - 10
+			/*const int LEN=80;
+			class Employee{
+				private:
+					char name[LEN];
+					unsigned long number;
+				public:
+					void getData() {
+						cout << "Введите фамилию: "; cin >> name;
+						cout << "Введите номер: "; cin >> number;
+					}
+					
+					void putData() {
+						cout << "Фамилия: " << name;
+						cout << " Номер: " << number << endl;
+					}
+			};
+
+			class Employee2 : public Employee {
+				private:
+					double compenstation;
+					enum eType{ hourly, weekly, monthly};
+					eType period;
+				public:
+					void getData() {
+						Employee::getData();
+						char type;
+						cout << "Введите зарпалту: "; cin >> compenstation;
+						cout << "Введите период получаемой зп почисовая (h), понедельняя (w), помесячная (m): "; cin >> type;
+
+						switch (type)
+						  {
+						   case 'h':
+							period = hourly; break;
+						   case 'w':
+							period = weekly; break;
+						   case 'm':
+							period = monthly; break;
+						  }
+					}
+
+					void putData() {
+						int temp;
+						Employee::putData();
+						cout << "З\\П: " << compenstation;
+						
+						switch (period)
+						{
+							case hourly:
+								cout << " почасово"; break;
+							case weekly:
+								cout <<  " понедельно"; break;
+							case monthly:
+								cout <<  " помесячно"; break;
+						}
+					}
+			};
+
+			class Laborer :public Employee2 {
+
+			public:
+				void getData() {
+					Employee2::getData();
+				}
+
+				void putData() {
+					Employee2::putData();
+				}
+			};
+			
+			class Laborer2 :public Laborer {
+				private:
+					float yearPrice;
+					int age;
+				public:
+					void getData() {
+						Laborer::getData();
+						cout << "Введите годовую зп: "; cin >> yearPrice;
+						cout << "Введите возраст: "; cin >> age;
+					}
+					
+					void putData() {
+						Laborer::putData();
+						cout << "Годовая зп: " << yearPrice;
+						cout << " Возраст: " << age << endl;
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 6 не сделал
+			/*const int LIMIT = 100;
+
+			class Array {
+				private:
+					int startIndex;
+					int endIndex;
+				public:
+					Array(int s, int e) : startIndex(s), endIndex(e) {}
+			};
+
+			class Safearray : public Array {
+				private:
+					int arr[LIMIT];
+				public:
+					 
+					int& operator[](int n) {
+						if (n < 0 || n >= LIMIT) {
+							cout << "\nОшибочный индекс!"; exit(1);
+						}
+						return arr[n];
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 7
+			/*class Counter{
+				protected:
+					unsigned int count;
+				public:
+				Counter() : count() { }
+				Counter(int с) : count(с) { }
+				unsigned int get_count() const {
+					return count;
+				}
+				Counter operator++ () {
+					return Counter(++count);
+				}
+				
+				Counter operator++ (int) {
+					return Counter(count++);
+				}
+			};
+
+			class CountDn : public Counter
+			{
+				public:
+					CountDn() : Counter() { }
+					CountDn(int с) : Counter(с) { }
+					CountDn operator-- ( ){
+						return CountDn(--count); 
+					}
+					CountDn operator-- (int){
+						return CountDn(count--);
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 11 не понятно
+			/*class Stack {
+				protected:
+					enum { MAX = 3 };
+					int st[MAX];
+					int top;
+				public:
+					Stack() { 
+						top = -1; 
+					}
+					void push(int var) {
+						st[++top] = var;
+					}
+					int pop() {
+						return st[top--];
+					}
+			};
+
+			class Stack2 : public Stack {
+				public:
+					void push(int var) {
+						if (top >= MAX - 1) {
+							cout << "\nОшибка: стек полон"; exit(1);
+						}
+						Stack::push(var);
+					}
+
+					int pop() {
+						if (top < 0) {
+							cout << "\nОшибка: стек пуст\n"; exit(1);
+						}
+						return Stack::pop();
+					}
+			};
+
+			class PairStack : public Stack2 {
+				public:
+					void push(int var, int var2) {
+						Stack2::push(var);
+						Stack2::push(var2);
+					}
+
+					int pop() {
+						return Stack2::pop();
+					}
+			};*/
+		#pragma endregion
+	#pragma endregion
+
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -2814,6 +3177,92 @@ int main()
 			//}
 		#pragma endregion
 
+	#pragma endregion
+
+	#pragma region Глава 9		
+		#pragma region Задание 1 - 3 - 4 - 9
+			/*Book b1;
+			Type t1;
+			Disk d1;
+
+			b1.getData();
+			t1.getData();
+			b1.putData();
+			t1.putData();
+			d1.getData();
+			d1.putData();*/
+		#pragma endregion
+		
+		#pragma region Задание 2 (ok) - 8 (не сделал)
+		/*	char xstr[] = "Ура, товарищи! ";
+			Pstring si = xstr;
+			si.display();
+
+			char xstr1[] = "Мы победим!";
+			Pstring s2 = xstr1;
+			cout << static_cast<char*>(s2);
+			cout << endl;
+
+			char xstr2[] = "Это очень длинная строка, фиг его знает как программа отработает, но надеюсь не упадет!";
+			Pstring s3 = xstr2;
+			s3.display();*/
+		#pragma endregion
+		
+		#pragma region Задание 5 - 10
+			/*Laborer l1;
+			l1.getData();
+			l1.putData();
+			cout << endl;
+			
+			Laborer2 l2;
+			l2.getData();
+			l2.putData();*/
+		#pragma endregion
+		
+		#pragma region Задание 6 не сделал
+			/*Safearray sal;
+			for (int j = 0; j < LIMIT; j++) {
+				sal[j] = j * 10;
+			}
+				
+			for (int j = 0; j < LIMIT; j++){
+				int temp = sal[j];
+				cout << "Элемент " << j << " равен " << temp << endl;
+			}*/
+		#pragma endregion
+		
+		#pragma region Задание 7
+			/*CountDn cl;
+			CountDn c2(100);
+			cout << "\ncl = " << cl.get_count();
+			cout << "\nc2 = " << c2.get_count();
+			cl++; cl++; cl++;
+
+			cout << "\ncl = " << cl.get_count(); 
+			c2--; c2--;
+
+			cout << "\nc2 = " << c2.get_count(); 
+			CountDn сЗ = --c2;
+			cout << "\nсЗ = " << сЗ.get_count();
+			cout << endl;*/
+		#pragma endregion
+		
+		#pragma region Задание 11
+		/*Stack si;
+		si.push(11);
+		si.push(22);
+		si.push(33);
+		cout << endl << si.pop();
+		cout << endl << si.pop();
+		cout << endl << si.pop();
+		cout << endl << si.pop();
+		cout << endl;
+		
+		PairStack p1;
+		p1.push(35,55);
+		cout << endl << p1.pop();
+		cout << endl;*/
+		#pragma endregion
 	#pragma endregion
 
 
