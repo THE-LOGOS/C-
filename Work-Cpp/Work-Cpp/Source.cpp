@@ -1865,6 +1865,261 @@ using namespace std;
 		#pragma endregion
 	#pragma endregion
 
+	#pragma region Глава 11
+		#pragma region Задание 1 - 2 - 5
+			/*const int VALUE = 10;
+			class Publication{
+				private:
+					string str;
+					float price;
+				public:
+					Publication() : str("N\\A"), price(0.0){}
+
+					virtual void getData() {
+						cout << "Введите название книги: "; cin >> str;
+						cout << "Введите цену книги: "; cin >> price;
+					}
+					
+					virtual void putData() {
+						cout << "Название книги: " << str << endl;
+						cout << "Цена книги: " << price << endl;
+					}
+
+					virtual bool isOveerSize() {
+						bool is;
+						if (price<450.00)
+						{
+							is = true;
+						}
+						else {
+							is = false;
+						}
+						return is;
+					}
+			};
+
+			class Book : public Publication{
+				private:
+					int page;
+				public:
+					Book() :page(0) {}
+
+					void getData() {
+						Publication::getData();
+						cout << "Введите кол-во страниц для книги: "; cin >> page;
+					}
+
+					void putData() {
+						Publication::putData();
+						cout << "Страниц в книге: " << page << endl;
+					}
+
+					bool isOveerSize() {
+						bool is;
+						if (page<800)
+						{
+							is = true;
+						}else{
+							is = false;
+						}
+						return is;
+					}
+			};
+
+			class Type : public Publication{
+				private:
+					float timeBook;
+				public:
+					Type() :timeBook(0.0) {}
+
+					void getData() {
+						Publication::getData();
+						cout << "Введите время записи для книги: "; cin >> timeBook;
+					}
+
+					void putData() {
+						Publication::putData();
+						cout << "Время записи книги: " << timeBook << endl;
+					}
+
+					bool isOveerSize() {
+						bool is;
+						if (timeBook<90)
+						{
+							is = true;
+						}
+						else {
+							is = false;
+						}
+						return is;
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 3
+			//class Distance{
+			//	private:
+			//		int feet;
+			//		float inches;
+			//	public:
+			//		Distance() :feet(0), inches(0.0) {}
+			//		Distance(float fltfeet) {
+			//			feet = int(fltfeet);
+			//			inches = 12 * (fltfeet - feet);
+			//		}
+			//		Distance(int ft, float in) :feet(ft), inches(in) {}
+			//		void showDist() {
+			//			cout << feet << "\'-" << inches << '\"';
+			//		}
+
+			//		/*friend Distance operator*(Distance d1, Distance d2) {
+			//			int f = d1.feet * d2.feet;
+			//			float i = d1.inches * d2.inches;
+			//			if (i >= 12.0) { i -= 12.0; f++; }
+			//			return Distance(f,i);
+			//		}*/
+			//		
+			//		Distance operator*(Distance d2) {
+			//			int f = feet * d2.feet;
+			//			float i = inches * d2.inches;
+			//			if (i >= 12.0) { i -= 12.0; f++; }
+			//			return Distance(f,i);
+			//		}
+
+			//		//friend Distance operator+(Distance, Distance);
+			//};
+
+			///*Distance operator+(Distance d1, Distance d2) {
+			//	int f = d1.feet + d2.feet;
+			//	float i = d1.inches + d2.inches;
+			//	if (i >= 12.0) { i -= 12.0; f++; }
+			//	return Distance(f, i);
+			//}*/
+		#pragma endregion
+
+		#pragma region Задание 4 не понятно
+			/*class Array{
+				private:
+					int* ptr;
+					int size;
+				public:
+					Array(int s) {
+						size = s;
+						ptr = new int[s];
+					}
+					~Array(){
+						delete[] ptr;
+					}
+					int& operator[](int j) {
+						return *(ptr + j);
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 8 - 11 не сделал
+			/*const int LEN = 80;
+			const int MAX = 40;
+			class Stack{
+				private:
+					char st[MAX];
+					int top;
+				public:
+					Stack() : top(0) {}
+					void push(char var) {
+						st[++top] = var;
+					}
+					char pop() { return st[top--]; }
+					int getTop() { return top; }
+			};
+
+			class Express {
+				private:
+					Stack s;
+					char* pStr;
+					int len;
+				public:
+					Express(char* ptr){
+						pStr = ptr;
+						len = strlen(pStr);
+					}
+					void parse() {
+						char ch;
+						char lastval;
+						char lastop;
+
+						for (int j = 0; j < LEN; j++) {
+							ch = pStr[j];
+							if (ch >= '0' && ch <= '9') {
+								s.push(ch - '0');
+							}
+							else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+								if (s.getTop() == 1) { s.push(ch); }
+								else {
+									lastval = s.pop();
+									lastop = s.pop();
+
+									if ((ch == '*' || ch == '/') && (lastop == '+' || lastop == '-')) {
+										s.push(lastop);
+										s.push(lastval);
+									} else {
+										switch (lastop) {
+										case '+': s.push(s.pop() + lastval); break;
+										case '-': s.push(s.pop() - lastval); break;
+										case '*': s.push(s.pop() * lastval); break;
+										case '/': s.push(s.pop() / lastval); break;
+										default: cout << "\nНеизвестный оператор"; exit(1);
+										}
+									}
+									s.push(ch);
+								}
+							}
+							else {
+								cout << "\nНеизвестный символ";
+								exit(1);
+								system("pause");
+							}
+						}
+					}
+					int solve() {
+						char lastval;
+						while (s.getTop() > 1) {
+							lastval = s.pop();
+							switch (s.pop()) {
+								case '+': s.push(s.pop() + lastval); break;
+								case '-': s.push(s.pop() - lastval); break;
+								case '*': s.push(s.pop() * lastval); break;
+								case '/': s.push(s.pop() / lastval); break;
+								default: cout << "\nНеизвесгный оператор"; exit(1); system("pause");
+							}
+						}
+						return int(s.pop());
+					}
+			};*/
+			
+			/*class Token{
+				public:
+					virtual float getNumber() = 0;
+					virtual char getOperator() = 0;
+			};
+			class Operator : public Token {
+				private:
+					char oper;
+				public:
+					Operator(char);
+					char getOperator();
+					float getNumber();
+			};
+			class Number : public Token {
+				private:
+					float fnum;
+				public:
+					Number(float);
+					char getOperator();
+					float getNumber();
+			};*/
+		#pragma endregion
+	#pragma endregion
+#pragma endregion
 int main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -3586,6 +3841,262 @@ int main()
 			}*/
 		#pragma endregion
 	#pragma endregion
+
+	#pragma region Глава 11
+		#pragma region Задание 1 - 2 - 5
+			/*const int VALUE = 10;
+			class Publication{
+				private:
+					string str;
+					float price;
+				public:
+					Publication() : str("N\\A"), price(0.0){}
+
+					virtual void getData() {
+						cout << "Введите название книги: "; cin >> str;
+						cout << "Введите цену книги: "; cin >> price;
+					}
+					
+					virtual void putData() {
+						cout << "Название книги: " << str << endl;
+						cout << "Цена книги: " << price << endl;
+					}
+
+					virtual bool isOveerSize() {
+						bool is;
+						if (price<450.00)
+						{
+							is = true;
+						}
+						else {
+							is = false;
+						}
+						return is;
+					}
+			};
+
+			class Book : public Publication{
+				private:
+					int page;
+				public:
+					Book() :page(0) {}
+
+					void getData() {
+						Publication::getData();
+						cout << "Введите кол-во страниц для книги: "; cin >> page;
+					}
+
+					void putData() {
+						Publication::putData();
+						cout << "Страниц в книге: " << page << endl;
+					}
+
+					bool isOveerSize() {
+						bool is;
+						if (page<800)
+						{
+							is = true;
+						}else{
+							is = false;
+						}
+						return is;
+					}
+			};
+
+			class Type : public Publication{
+				private:
+					float timeBook;
+				public:
+					Type() :timeBook(0.0) {}
+
+					void getData() {
+						Publication::getData();
+						cout << "Введите время записи для книги: "; cin >> timeBook;
+					}
+
+					void putData() {
+						Publication::putData();
+						cout << "Время записи книги: " << timeBook << endl;
+					}
+
+					bool isOveerSize() {
+						bool is;
+						if (timeBook<90)
+						{
+							is = true;
+						}
+						else {
+							is = false;
+						}
+						return is;
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 3
+			//class Distance{
+			//	private:
+			//		int feet;
+			//		float inches;
+			//	public:
+			//		Distance() :feet(0), inches(0.0) {}
+			//		Distance(float fltfeet) {
+			//			feet = int(fltfeet);
+			//			inches = 12 * (fltfeet - feet);
+			//		}
+			//		Distance(int ft, float in) :feet(ft), inches(in) {}
+			//		void showDist() {
+			//			cout << feet << "\'-" << inches << '\"';
+			//		}
+
+			//		/*friend Distance operator*(Distance d1, Distance d2) {
+			//			int f = d1.feet * d2.feet;
+			//			float i = d1.inches * d2.inches;
+			//			if (i >= 12.0) { i -= 12.0; f++; }
+			//			return Distance(f,i);
+			//		}*/
+			//		
+			//		Distance operator*(Distance d2) {
+			//			int f = feet * d2.feet;
+			//			float i = inches * d2.inches;
+			//			if (i >= 12.0) { i -= 12.0; f++; }
+			//			return Distance(f,i);
+			//		}
+
+			//		//friend Distance operator+(Distance, Distance);
+			//};
+
+			///*Distance operator+(Distance d1, Distance d2) {
+			//	int f = d1.feet + d2.feet;
+			//	float i = d1.inches + d2.inches;
+			//	if (i >= 12.0) { i -= 12.0; f++; }
+			//	return Distance(f, i);
+			//}*/
+		#pragma endregion
+
+		#pragma region Задание 4 не понятно
+			/*class Array{
+				private:
+					int* ptr;
+					int size;
+				public:
+					Array(int s) {
+						size = s;
+						ptr = new int[s];
+					}
+					~Array(){
+						delete[] ptr;
+					}
+					int& operator[](int j) {
+						return *(ptr + j);
+					}
+			};*/
+		#pragma endregion
+
+		#pragma region Задание 8 - 11 не сделал
+			/*const int LEN = 80;
+			const int MAX = 40;
+			class Stack{
+				private:
+					char st[MAX];
+					int top;
+				public:
+					Stack() : top(0) {}
+					void push(char var) {
+						st[++top] = var;
+					}
+					char pop() { return st[top--]; }
+					int getTop() { return top; }
+			};
+
+			class Express {
+				private:
+					Stack s;
+					char* pStr;
+					int len;
+				public:
+					Express(char* ptr){
+						pStr = ptr;
+						len = strlen(pStr);
+					}
+					void parse() {
+						char ch;
+						char lastval;
+						char lastop;
+
+						for (int j = 0; j < LEN; j++) {
+							ch = pStr[j];
+							if (ch >= '0' && ch <= '9') {
+								s.push(ch - '0');
+							}
+							else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+								if (s.getTop() == 1) { s.push(ch); }
+								else {
+									lastval = s.pop();
+									lastop = s.pop();
+
+									if ((ch == '*' || ch == '/') && (lastop == '+' || lastop == '-')) {
+										s.push(lastop);
+										s.push(lastval);
+									} else {
+										switch (lastop) {
+										case '+': s.push(s.pop() + lastval); break;
+										case '-': s.push(s.pop() - lastval); break;
+										case '*': s.push(s.pop() * lastval); break;
+										case '/': s.push(s.pop() / lastval); break;
+										default: cout << "\nНеизвестный оператор"; exit(1);
+										}
+									}
+									s.push(ch);
+								}
+							}
+							else {
+								cout << "\nНеизвестный символ";
+								exit(1);
+								system("pause");
+							}
+						}
+					}
+					int solve() {
+						char lastval;
+						while (s.getTop() > 1) {
+							lastval = s.pop();
+							switch (s.pop()) {
+								case '+': s.push(s.pop() + lastval); break;
+								case '-': s.push(s.pop() - lastval); break;
+								case '*': s.push(s.pop() * lastval); break;
+								case '/': s.push(s.pop() / lastval); break;
+								default: cout << "\nНеизвесгный оператор"; exit(1); system("pause");
+							}
+						}
+						return int(s.pop());
+					}
+			};*/
+			
+			/*class Token{
+				public:
+					virtual float getNumber() = 0;
+					virtual char getOperator() = 0;
+			};
+			class Operator : public Token {
+				private:
+					char oper;
+				public:
+					Operator(char);
+					char getOperator();
+					float getNumber();
+			};
+			class Number : public Token {
+				private:
+					float fnum;
+				public:
+					Number(float);
+					char getOperator();
+					float getNumber();
+			};*/
+		#pragma endregion
+	#pragma endregion
+
 
 	system("pause");
 	return 0;
